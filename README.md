@@ -1,41 +1,57 @@
-# SVGLab
+# Shadecn
 
-**Modern SVG Color Editor & React Component Generator**
+**SVG Color Customizer with shadcn Theme Integration**
 
-Transform SVGs into React components with custom colors. Import, edit colors, and export as JSX with Tailwind CSS theme support.
+Transform your SVGs into theme-aware React components. Import SVGs, customize colors with shadcn themes, and export clean JSX components that adapt to your design system.
 
-## ✨ Features
+## Features
 
-- **🎨 Color Customization** - Edit SVG colors with visual color pickers
-- **⚛️ React Component Export** - Convert SVGs to JSX components
-- **🎯 Tailwind CSS Integration** - Import theme colors from Tailwind/Shadcn configs
-- **📱 Modern UI** - Clean, responsive interface built with shadcn/ui
-- **🌙 Dark/Light Theme** - Automatic theme switching
-- **📋 Copy & Download** - Export as files or copy to clipboard
-- **🧹 Smart Cleanup** - Remove IDs, classes, sizing attributes
-- **✨ Code Formatting** - Prettify output with proper formatting
+- **Theme Integration** - Import shadcn CSS theme configs and map colors directly
+- **Smart Color Mapping** - Choose which theme colors replace which SVG colors
+- **React Component Export** - Convert SVGs to JSX with proper theming
+- **Code Transformation** - Remove IDs, classes, sizing, and format output
+- **Live Preview** - See changes instantly with theme color previews
+- **Modern Interface** - Built with shadcn/ui components
 
-## 🚀 Quick Start
+## How It Works
 
-1. **Import** - Paste SVG code or upload an SVG file
-2. **Customize** - Edit colors manually or import from Tailwind config
-3. **Configure** - Set export options (React, cleanup, formatting)
-4. **Export** - Copy code or download as component
+1. **Import** - Paste or upload your SVG
+2. **Map Colors** - Import your shadcn theme and map SVG colors to theme colors
+3. **Configure** - Set export options (React conversion, cleanup, formatting)
+4. **Export** - Get theme-aware JSX that uses `hsl(var(--primary))` instead of hex colors
 
-## 🛠️ Tech Stack
+## Theme-Aware Output
 
-- **React** + **TypeScript**
-- **Tailwind CSS** + **shadcn/ui**
-- **Vite** for build tooling
-- **Sonner** for notifications
+Instead of hard-coded colors:
+```jsx
+<svg fill="#8b5cf6">
+  <path d="..." />
+</svg>
+```
 
-## 🎯 Perfect For
+Get theme-integrated components:
+```jsx
+<svg fill="hsl(var(--primary))">
+  <path d="..." />
+</svg>
+```
 
-- Converting design assets to React components
-- Customizing icon colors for your brand
-- Generating themed SVG components
-- Cleaning up exported SVGs from design tools
+## Tech Stack
 
----
+- React + TypeScript
+- Tailwind CSS + shadcn/ui  
+- Vite
+- Culori (for OKLCH color conversion)
 
-Built with modern web technologies for developers who love clean, efficient workflows.
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Deployment
+
+```bash
+npm run build
+```
