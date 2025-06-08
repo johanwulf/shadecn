@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import prettier from "prettier";
 import babel from "prettier/plugins/babel";
 import estree from "prettier/plugins/estree";
-import { XMLParser, XMLValidator } from "fast-xml-parser";
+import { XMLValidator } from "fast-xml-parser";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -14,11 +14,31 @@ CODE
 }
 `;
 
-export async function transform(settings: any, svg: string) {
+type TransformSettings = {
+  removeIds?: boolean
+  react?: boolean
+  removeClasses?: boolean
+  removeSizing?: boolean
+  format?: boolean
+}
+
+type ThemeMapping = Record<string, string>
+
+export const transform = async (settings: TransformSettings, svg: string, themeMapping?: ThemeMapping) => {
   let obj = svg;
 
   if (XMLValidator.validate(svg) !== true) {
     return false;
+  }
+
+  // Apply theme color mappings to use CSS custom properties
+  if (themeMapping && Object.keys(themeMapping).length > 0) {
+    Object.entries(themeMapping).forEach(([originalHexColor, themeName]) => {
+      const cssVar = `hsl(var(--${themeName}))`
+      // Escape special regex characters in the hex color
+      const escapedColor = originalHexColor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      obj = obj.replace(new RegExp(escapedColor, "g"), cssVar)
+    })
   }
 
   if (settings.removeIds) {
