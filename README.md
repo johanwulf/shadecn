@@ -1,4 +1,4 @@
-# Shadecn
+# shadecn
 
 **SVG Color Customizer with shadcn Theme Integration**
 
